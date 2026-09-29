@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Viral Fruit Animation Prompt Studio</title>
+<style>
+:root{font-family:Arial,sans-serif;color:#171717;background:#fff7ef}
+*{box-sizing:border-box}
+body{margin:0;padding:22px;background:linear-gradient(180deg,#fff8ef,#fff)}
+.card{max-width:680px;margin:auto;padding:30px;border:1px solid #ffd7b8;border-radius:24px;background:#fff;box-shadow:0 12px 40px #00000012;text-align:center}
+.brand{font-size:15px;font-weight:900;letter-spacing:.08em;color:#e53935}
+.title{font-size:28px;font-weight:900;margin:8px 0}
+.sub{color:#666;margin:0 auto 25px;max-width:520px;line-height:1.45}
+.start{border:0;border-radius:16px;padding:17px 28px;font-size:19px;font-weight:900;cursor:pointer;background:#ff3b30;color:#fff;box-shadow:0 7px 18px #ff3b3040;width:min(360px,100%)}
+.menu{display:none;gap:12px;flex-direction:column;margin-top:20px}
+.menu button{border:1px solid #e6e6e6;border-radius:16px;padding:15px 18px;font-size:17px;font-weight:800;cursor:pointer;background:#fff;color:#222;text-align:left}
+.menu button:hover{border-color:#ff8a65;background:#fff7f2}
+.back{font-size:14px!important;padding:10px 14px!important;width:max-content;background:#eee!important}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="brand">🍌 🍓 VIRAL FRUIT</div>
+  <div class="title">ANIMATION PROMPT STUDIO</div>
+  <p class="sub">Crie histórias, personagens e Shorts virais com frutas antropomórficas em animação 3D.</p>
+  <button id="start" class="start">▶ INICIAR</button>
+  <div id="menu" class="menu">
+    <button data-action="story">🎬 Criar uma história</button>
+    <button data-action="character">🍓 Criar personagem</button>
+    <button data-action="short">⚡ Criar Short viral</button>
+    <button data-action="adapt">🧩 Adaptar prompt</button>
+    <button id="back" class="back">← Voltar</button>
+  </div>
+</div>
+<script>
+const start=document.getElementById("start");
+const menu=document.getElementById("menu");
+const back=document.getElementById("back");
+const prompts={
+ story:"Quero criar uma história original com frutas antropomórficas.",
+ character:"Quero criar um personagem de fruta antropomórfica.",
+ short:"Quero criar um Short viral de até 60 segundos.",
+ adapt:"Quero adaptar um prompt existente para uma ferramenta de imagem ou vídeo."
+};
+start.onclick=()=>{start.style.display="none";menu.style.display="flex"};
+back.onclick=()=>{menu.style.display="none";start.style.display="block"};
+for(const button of menu.querySelectorAll("[data-action]")){
+ button.onclick=()=>{
+   window.parent.postMessage({
+     jsonrpc:"2.0",
+     method:"ui/message",
+     params:{content:[{type:"text",text:prompts[button.dataset.action]}]}
+   },"*");
+ };
+}
+</script>
+</body>
+</html>
