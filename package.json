@@ -1,0 +1,12 @@
+{
+  "name":"viral-fruit-animation-prompt-studio-mcp",
+  "private":true,
+  "type":"module",
+  "scripts":{"start":"node server.js"},
+  "engines":{"node":">=20"},
+  "dependencies":{
+    "@modelcontextprotocol/ext-apps":"latest",
+    "@modelcontextprotocol/sdk":"latest",
+    "zod":"latest"
+  }
+}
